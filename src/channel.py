@@ -54,3 +54,7 @@ class Channel:
     def print_info(self) -> None:
         """Выводит информацию о канале в словарь в JSON формате с отступами"""
         print(json.dumps(self.channel, indent=2, ensure_ascii=False))
+
+    @classmethod
+    def get_service(cls):
+        return cls.YOUTUBE
