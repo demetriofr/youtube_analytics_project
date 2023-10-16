@@ -16,8 +16,17 @@ class Channel:
         __api_key: str = os.getenv('YT_API_KEY')
         return __api_key
 
-    # создать специальный объект для работы с API
-    youtube = build('youtube', 'v3', developerKey=__api_key())
+    __API_KEY = __api_key()
+
+    @staticmethod
+    def youtube(api_key):
+        """
+        Создаёт специальный объект для работы с API
+        """
+        youtube = build('youtube', 'v3', developerKey=api_key)
+        return youtube
+
+    YOUTUBE = youtube(__API_KEY)
 
     def __init__(self, channel_id: str) -> None:
         """Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API."""
@@ -25,6 +34,6 @@ class Channel:
 
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
-        channel = self.youtube.channels().list(id=self.channel_id, part='snippet,statistics').execute()
+        channel = self.YOUTUBE.channels().list(id=self.channel_id, part='snippet,statistics').execute()
         # Выводит словарь в json-подобном удобном формате с отступами
         print(json.dumps(channel, indent=2, ensure_ascii=False))
