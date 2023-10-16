@@ -27,20 +27,22 @@ class Channel:
     __API_KEY = __api_key()
     YOUTUBE = youtube(__API_KEY)
 
-
-
-    def __init__(self, channel_id: str) -> None:
+    def __init__(self, channel_id_: str) -> None:
         """
         Экземпляр инициализируется id канала и добавляет данные по API
         """
-        self.channel = self.get_info_about_channel(channel_id)
-        self.channel_id = self.channel['items'][0]['id']
+        self.channel = self.get_info_about_channel(channel_id_)
+        self.__channel_id = self.channel_id
         self.title = self.channel['items'][0]['snippet']['title']
         self.description = self.channel['items'][0]['snippet']['description']
         self.url = 'https://www.youtube.com/' + self.channel['items'][0]['snippet']['customUrl']
         self.subscriber_count = int(self.channel['items'][0]['statistics']['subscriberCount'])
         self.video_count = int(self.channel['items'][0]['statistics']['videoCount'])
         self.view_count = int(self.channel['items'][0]['statistics']['viewCount'])
+
+    @property
+    def channel_id(self):
+        return self.channel['items'][0]['id']
 
     def get_info_about_channel(self, channel_id):
         """
@@ -51,12 +53,4 @@ class Channel:
 
     def print_info(self) -> None:
         """Выводит информацию о канале в словарь в JSON формате с отступами"""
-        # print(json.dumps(self.channel, indent=2, ensure_ascii=False))
-
-        print(self.channel_id)
-        print(self.title)
-        print(self.description)
-        print(self.url)
-        print(self.subscriber_count)
-        print(self.video_count)
-        print(self.view_count)
+        print(json.dumps(self.channel, indent=2, ensure_ascii=False))
