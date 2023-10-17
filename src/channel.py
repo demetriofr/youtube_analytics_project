@@ -57,4 +57,35 @@ class Channel:
 
     @classmethod
     def get_service(cls):
+        """
+        Получает объекты для работы с API вне класса
+        """
         return cls.YOUTUBE
+
+    def to_json(self, name_json='.'):
+        """
+        Сохраняет атрибуты экземпляра Channel в JSON-файл
+        """
+        # Определение имени для файла .json
+        if name_json.split('.')[1] == 'json':
+            name_json = name_json
+        else:
+            name_json = self.title.lower() + '.json'
+
+        # Путь к файлу .json
+        path_json = os.path.join('..', 'data', name_json)
+
+        # Создание словаря с атрибутами экземпляра класса
+        dict_attr = {
+            'channel_id': self.channel_id,
+            'title': self.title,
+            'description': self.description,
+            'url': self.url,
+            'subscriber_count': self.subscriber_count,
+            'video_count': self.video_count,
+            'view_count': self.view_count
+        }
+
+        # Добавление данных в файл .json
+        with open(path_json, 'w', encoding='utf-8') as f:
+            f.write(json.dumps(dict_attr, indent=2, ensure_ascii=False))
