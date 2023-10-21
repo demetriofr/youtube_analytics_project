@@ -89,3 +89,51 @@ class Channel:
         # Добавление данных в файл .json
         with open(path_json, 'w', encoding='utf-8') as f:
             f.write(json.dumps(dict_attr, indent=2, ensure_ascii=False))
+    def __str__(self):
+        """
+        Выводит информацию о название канала (аттрибут title) и
+        ссылку (аттрибут url) на него
+        """
+        return f'{self.title} ({self.url})'
+
+    def __add__(self, other):
+        """
+        Складывает количество подписчиков
+        """
+        return self.subscriber_count + other.subscriber_count
+
+    def __sub__(self, other):
+        """
+        Отнимает количество подписчиков
+        """
+        return self.subscriber_count - other.subscriber_count
+
+    def __lt__(self, other):
+        """
+        Проверяет меньше ли количество подписчиков
+        """
+        return self.subscriber_count < other.subscriber_count
+
+    def __gt__(self, other):
+        """
+        Проверяет больше ли количество подписчиков
+        """
+        return self.subscriber_count > other.subscriber_count
+
+    def __le__(self, other):
+        """
+        Проверяет меньше либо равно количество подписчиков
+        """
+        return self.subscriber_count <= other.subscriber_count
+
+    def __ge__(self, other):
+        """
+        Проверяет больше либо равно количество подписчиков
+        """
+        return self.subscriber_count >= other.subscriber_count
+
+    def __eq__(self, other):
+        """
+        Проверяет равно ли количество подписчиков
+        """
+        return self.subscriber_count == other.subscriber_count

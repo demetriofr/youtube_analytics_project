@@ -40,3 +40,20 @@ def test_get_service():
 
 def test_channel__to_json():
     pass
+
+
+def test_channel_dunder_method():
+    # Создаем два экземпляра класса
+    moscowpython = Channel('UC-OVMPlMA3-YCIeg4z5z23A')
+    highload = Channel('UCwHL6WHUarjGfUM_586me8w')
+
+    # Проверяем магические методы (сложение / вычитание / сравнение)
+    assert str(moscowpython) == 'MoscowPython (https://www.youtube.com/@moscowdjangoru)'
+    assert moscowpython + highload >= 100100
+    assert moscowpython - highload <= -48300
+    assert highload - moscowpython >= 48300
+    assert bool(moscowpython > highload) == False
+    assert bool(moscowpython >= highload) == False
+    assert bool(moscowpython < highload) == True
+    assert bool(moscowpython <= highload) == True
+    assert bool(moscowpython == highload) == False
