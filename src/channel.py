@@ -89,6 +89,7 @@ class Channel:
         # Добавление данных в файл .json
         with open(path_json, 'w', encoding='utf-8') as f:
             f.write(json.dumps(dict_attr, indent=2, ensure_ascii=False))
+
     def __str__(self):
         """
         Выводит информацию о название канала (аттрибут title) и
