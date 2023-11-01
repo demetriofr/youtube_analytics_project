@@ -1,9 +1,9 @@
 from json import dumps
 
-from src.channel import Channel
+from src.youtube import Youtube
 
 
-class Video(Channel):
+class Video(Youtube):
     def __init__(self, video_id: str):
         """
         Экземпляр инициализируется id видео и добавляет данные по API
