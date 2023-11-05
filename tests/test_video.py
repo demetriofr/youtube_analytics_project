@@ -26,3 +26,13 @@ def test_plvideo():
     assert video1.view_count >= 694
     assert video1.like_count >= 10
     assert str(video1) == 'MoscowPython Meetup 78 - вступление'
+
+
+def test_broken_video_id():
+    broken_video_id = '123_4fObz_q'
+    broken_video = Video(broken_video_id)
+    assert broken_video.video_id == '123_4fObz_q'
+    assert broken_video.title is None
+    assert broken_video.url is None
+    assert broken_video.view_count is None
+    assert broken_video.like_count is None
